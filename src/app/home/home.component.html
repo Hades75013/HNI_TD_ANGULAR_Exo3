@@ -1,0 +1,18 @@
+<h1>Liste des Transactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th (click)="sortTransactions('date')">Date</th>
+      <th (click)="sortTransactions('amount')">Montant</th>
+      <th (click)="sortTransactions('description')">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactions">
+      <td>{{ transaction.date }}</td>
+      <td>{{ transaction.amount }}</td>
+      <td>{{ transaction.description }}</td>
+    </tr>
+  </tbody>
+</table>
