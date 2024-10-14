@@ -1,7 +1,9 @@
 import {Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
+import {TransactionDetailComponent} from './transaction-detail/transaction-detail.component'; // Composant pour afficher les détails
+
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent }, // Page d'accueil avec la liste des transactions
-  // Ajoutez d'autres routes ici si nécessaire
+  { path: '', component: HomeComponent },
+  { path: 'transaction-detail/:id', component: TransactionDetailComponent }
 ];

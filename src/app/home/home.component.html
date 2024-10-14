@@ -1,18 +1,23 @@
-<h1>Liste des Transactions</h1>
-
-<table>
-  <thead>
+<table class="table table-hover">
+  <thead class="thead-light">
     <tr>
-      <th (click)="sortTransactions('date')">Date</th>
-      <th (click)="sortTransactions('amount')">Montant</th>
-      <th (click)="sortTransactions('description')">Description</th>
+      <th scope="col" (click)="sortBy('id')">ID</th>
+      <th scope="col" (click)="sortBy('amount')">Amount</th>
+      <th scope="col" (click)="sortBy('balance')">Balance</th>
+      <th scope="col" (click)="sortBy('label')">Label</th>
+      <th scope="col" (click)="sortBy('date')">Date</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let transaction of transactions">
-      <td>{{ transaction.date }}</td>
+      <td>
+        <button (click)="viewDetails(transaction.id)">Voir Détails</button>
+        {{ transaction.id }}
+      </td>
       <td>{{ transaction.amount }}</td>
-      <td>{{ transaction.description }}</td>
+      <td>{{ transaction.balance }}</td>
+      <td>{{ transaction.label }}</td>
+      <td>{{ transaction.date }}</td>
     </tr>
   </tbody>
 </table>

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TransactionService} from '../transaction.service';
-import {HttpClientModule} from '@angular/common/http'; // Importez HttpClientModule ici
+import {TransactionService} from '../services/transaction.service';
+import {HttpClientModule} from '@angular/common/http'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +13,9 @@ import {HttpClientModule} from '@angular/common/http'; // Importez HttpClientMod
 })
 export class HomeComponent implements OnInit{
   transactions: any[] = [];
+  sortDirection = true; // True = Ascendant, False = Descendant
 
-  constructor(private transactionService: TransactionService) {}
+  constructor(private transactionService: TransactionService, private router: Router) {}
 
   ngOnInit(): void {
     this.transactionService.getTransactions().subscribe((data) => {
@@ -21,11 +23,14 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  sortTransactions(criteria: string) {
-    this.transactions.sort((a, b) => {
-      if (a[criteria] < b[criteria]) return -1;
-      if (a[criteria] > b[criteria]) return 1;
-      return 0;
-    });
+ // Méthode de tri
+  sortBy(column: string): void {
+    this.sortDirection = !this.sortDirection;
+    const direction = this.sortDirection ? 1 : -1;
+    this.transactions.sort((a: any, b: any) => (a[column] > b[column] ? direction : -direction));
+  }
+
+  viewDetails(id: string): void {
+    this.router.navigate(['/transaction-detail', id]); // Redirige vers la page de détail avec l'ID de la transaction
   }
 }
